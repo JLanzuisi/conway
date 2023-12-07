@@ -16,19 +16,36 @@ def draw_grid(size:tuple, grid: set):
 def grid_setup(size, grid):
     while True:
         os.system('clear')
+        
         if not grid:
-            print('This is your empty grid:')
+            print(
+                'This is your empty grid ('
+                + str(size[0])
+                + 'x'
+                + str(size[1])
+                + ')'
+            )
             draw_grid(size, grid)
-            print('Now you can mark some cells, one at a time, like so \'0 1\'')
-            print('''When you're done press enter''')
+            print('Now you can mark some cells, one at a time,')
+            print('by writing the coordinates into the prompt like so:')
+            print('PROMPT> 0 1')
+            print('or')
+            print('PROMPT> 3 1')
         else:
-            print('You can keep marking cells! (Press Enter when done)')
+            print('You can keep marking cells!')
+            print('Send an empty prompt when done')
+            print('Send u to undo')
             draw_grid(size, grid)
-        mark = input()
+            
+        mark = input('\nPROMPT> ')
 
         if not mark:
             break
-    
+
+        if mark == 'u':
+            grid.discard(coords)
+            continue
+        
         coords = tuple(map(int, mark.split(' ')))
         grid.add(coords)
         draw_grid(size, grid)
@@ -58,11 +75,7 @@ while grid:
     
     print(sep)
     print('INFO:')
-    print('Current generation: ' + str(gen) + '.')
-    print('Live cells: ' + str(len(grid)) + '.')
+    print('Generation: ' + str(gen) + '.')
+    print('Population: ' + str(len(grid)) + '.')
     
-    time.sleep(2)
-
-# TODO
-# Unmark a cell.
-# Pause, play?
+    time.sleep(0.5)
