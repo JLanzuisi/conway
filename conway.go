@@ -11,7 +11,7 @@ type Grid struct {
 	size  [2]int
 }
 
-func neighbors(grid Grid, cell Cell) (total int) {
+func Neighbors(grid Grid, cell Cell) (total int) {
 	total = 0
 	deltas := []Cell{
 		{-1, -1},
@@ -60,7 +60,7 @@ func NextGen(grid Grid) (nextgen Grid) {
 	for row := 0; row < grid.size[0]; row++ {
 		for col := 0; col < grid.size[1]; col++ {
 			cell := Cell{row, col}
-			count := neighbors(grid, cell)
+			count := Neighbors(grid, cell)
 
 			exists := grid.cells[cell]
 

@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 	cells := CellSet{
 		Cell{1, 2}: true,
@@ -11,8 +9,10 @@ func main() {
 
 	grid := Grid{cells, [2]int{10, 10}}
 
-	nextgen := NextGen(grid)
+	// nextgen := NextGen(grid)
 
-	fmt.Printf("Before: %+v\n", grid.cells)
-	fmt.Printf("After: %+v\n", nextgen.cells)
+	// fmt.Printf("Before: %+v\n", grid.cells)
+	// fmt.Printf("After: %+v\n", nextgen.cells)
+
+	DrawGrid(grid)
 }
