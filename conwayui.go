@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func DrawGrid(grid Grid) {
+func printGrid(grid Grid) {
 	for row := 0; row < grid.size[0]; row++ {
 		line := ""
 		for col := 0; col < grid.size[1]; col++ {
@@ -16,4 +16,8 @@ func DrawGrid(grid Grid) {
 		}
 		fmt.Println(line)
 	}
+}
+
+func PlayPrintf(grid Grid) {
+	printGrid(grid)
 }

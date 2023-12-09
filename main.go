@@ -14,5 +14,5 @@ func main() {
 	// fmt.Printf("Before: %+v\n", grid.cells)
 	// fmt.Printf("After: %+v\n", nextgen.cells)
 
-	DrawGrid(grid)
+	PlayPrintf(grid)
 }
