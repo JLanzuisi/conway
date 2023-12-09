@@ -3,48 +3,42 @@ package main
 import "fmt"
 import "maps"
 
-type Pair struct {
-	x int
-	y int
-}
-
-type Cell Pair
+type Cell [2]int
 
 type CellSet map[Cell]bool
 
 type Grid struct {
 	cells CellSet
-	n     int
-	m     int
+	size  [2]int
 }
 
 func neighbors(grid Grid, cell Cell) (total int) {
 	total = 0
-	deltas := []Pair{
-		Pair{-1, -1},
-		Pair{-1, 0},
-		Pair{-1, 1},
-		Pair{0, 1},
-		Pair{1, 1},
-		Pair{1, 0},
-		Pair{1, -1},
-		Pair{0, -1},
+	deltas := []Cell{
+		{-1, -1},
+		{-1, 0},
+		{-1, 1},
+		{0, 1},
+		{1, 1},
+		{1, 0},
+		{1, -1},
+		{0, -1},
 	}
 
 	for _, v := range deltas {
-		row := cell.x + v.x
-		col := cell.y + v.y
+		row := cell[0] + v[0]
+		col := cell[1] + v[1]
 
 		if row == -1 {
-			row = grid.n - 1
+			row = grid.size[0] - 1
 		}
-		if row == grid.n {
+		if row == grid.size[0] {
 			row = 0
 		}
 		if col == -1 {
-			col = grid.m - 1
+			col = grid.size[1] - 1
 		}
-		if col == grid.m {
+		if col == grid.size[1] {
 			col = 0
 		}
 
@@ -60,13 +54,13 @@ func neighbors(grid Grid, cell Cell) (total int) {
 }
 
 func NextGen(grid Grid) (nextgen Grid) {
-	nextgen = Grid{make(CellSet), grid.n, grid.m}
+	nextgen = Grid{make(CellSet), grid.size}
 
 	maps.Copy(nextgen.cells, grid.cells)
 
-	for row := 0; row < grid.n; row++ {
-		for col := 0; col < grid.m; col++ {
-			cell := Cell{x: row, y: col}
+	for row := 0; row < grid.size[0]; row++ {
+		for col := 0; col < grid.size[1]; col++ {
+			cell := Cell{row, col}
 			count := neighbors(grid, cell)
 
 			exists := grid.cells[cell]
@@ -93,7 +87,7 @@ func main() {
 		Cell{2, 2}: true,
 	}
 
-	grid := Grid{cells, 10, 10}
+	grid := Grid{cells, [2]int{10, 10}}
 
 	nextgen := NextGen(grid)
 
